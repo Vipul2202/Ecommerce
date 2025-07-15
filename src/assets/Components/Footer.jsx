@@ -10,7 +10,7 @@ import {
 
 const Footer = () => {
     return (
-        <div className="bg-black text-white pt-10">
+        <div className="bg-black text-white pt-10  mx-auto">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {/* Contact Info */}
@@ -69,7 +69,7 @@ const Footer = () => {
 
                 <div className="border-t border-gray-700 mt-10 pt-6 text-center text-sm">
                     <p>
-                        &copy; <a href="#" className="text-blue-400 hover:underline">vipul</a>, All Rights Reserved.
+                        &copy; <a href="#" className="text-blue-400 hover:underline">© carsaloon.com.au</a>, All Rights Reserved.
                     </p>
                 </div>
             </div>

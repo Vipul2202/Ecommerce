@@ -11,20 +11,22 @@ import { Car, Droplets, Shield, Sparkles, Home, Settings, Wrench, Plus } from 'l
 
 const NextArrow = ({ onClick }) => (
   <div
-    onClick={onClick}
-    className="absolute right-4 top-1/2 transform -translate-y-1/2 
-    bg-white/20 backdrop-blur-md rounded-full p-3 cursor-pointer z-10 
-    hover:bg-white/30 shadow-lg border border-white/30 transition"
-  >
-    <span className="text-white text-lg">▶</span>
-  </div>
+  onClick={onClick}
+  className="absolute right-24 top-1/2 transform -translate-y-1/2 
+  w-12 h-12 flex items-center justify-center
+  bg-white/20 backdrop-blur-md rounded-full cursor-pointer z-10 
+  hover:bg-white/30 shadow-lg border border-white/30 transition"
+>
+  <span className="text-white text-lg">▶</span>
+</div>
+
 );
 
 
 const PrevArrow = ({ onClick }) => (
   <div
     onClick={onClick}
-    className="absolute left-4 top-1/2 transform -translate-y-1/2 
+    className="absolute left-24 top-1/2 transform -translate-y-1/2  h-12 w-12 items-center justify-center flex
     bg-white/20 backdrop-blur-md rounded-full p-3 cursor-pointer z-10 
     hover:bg-white/30 shadow-lg border border-white/30 transition"
   >
@@ -105,7 +107,7 @@ const services = [
   };
 
   return (
-    <div className="text-white">
+    <div className="text-white  mx-auto  ">
       {/* Carousel Section */}
       <div className="w-full overflow-hidden relative">
         <Slider {...settings}>

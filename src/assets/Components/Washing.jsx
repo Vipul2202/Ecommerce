@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import team from "../../../src/img/team-2.jpg";
 
-const Detailing = () => {
+const Washing = () => {
   const [formData, setFormData] = useState({
     carType: "",
     registration: "",
@@ -39,44 +39,36 @@ const Detailing = () => {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-black text-white">
+    <div className=" flex flex-col min-h-screen bg-black text-white">
       {/* Header */}
       <div className="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-orange-500 mb-4">
-          Detailing Service
+        Washing Services
         </h1>
         <nav className="text-gray-600">
           <span className="text-orange-500">Home</span>
           <span className="mx-2">/</span>
-          <span>Detailing Services</span>
+          <span>Washing Services</span>
         </nav>
       </div>
 
       {/* Description */}
       <div className="max-w-5xl mx-auto px-4 py-10 text-white">
         <h2 className="text-3xl md:text-4xl font-bold mb-6">
-          Premium Car Detailing Services at Our Car Salon – Restore Your Vehicle’s Shine!
+         Professional Car Washing Services at Car Saloon – Keep Your Vehicle Spotless !
+
         </h2>
         <p className="text-lg mb-6">
-          Looking for professional car detailing services to give your vehicle a showroom finish?
-          Our car salon offers expert auto detailing solutions designed to restore, protect, and enhance your car’s interior and exterior.
+          Looking for the best car washing services to keep your vehicle in pristine condition? At our car salon, we provide top-notch auto detailing and cleaning solutions to enhance your car’s appearance and protect its value.
+
         </p>
 
-        <h3 className="text-2xl font-semibold mb-4">We provide a range of detailing services to keep your car looking brand new:</h3>
+        <h3 className="text-2xl font-semibold mb-4">Why Choose Our Car Salon?</h3>
         <ul className="space-y-2 mb-6">
-          <li className="flex items-start"><span className="text-green-400 mr-2">✅</span>Exterior Detailing – Deep cleaning, polishing, and ceramic coating for a flawless shine.</li>
-          <li className="flex items-start"><span className="text-green-400 mr-2">✅</span>Interior Detailing – Vacuuming, leather conditioning, and steam cleaning for a fresh cabin.</li>
-          <li className="flex items-start"><span className="text-green-400 mr-2">✅</span>Paint Correction – Removes scratches, swirl marks, and restores the original paint finish.</li>
-          <li className="flex items-start"><span className="text-green-400 mr-2">✅</span>Engine Bay Detailing – Cleans and protects your engine for better performance and longevity.</li>
-          <li className="flex items-start"><span className="text-green-400 mr-2">✅</span>Headlight Restoration – Enhances visibility and gives headlights a crystal-clear look.</li>
-        </ul>
-
-        <h3 className="text-2xl font-semibold mb-4">Why Choose Our Car Saloon?</h3>
-        <ul className="space-y-2">
-          <li className="flex items-start"><span className="text-green-400 mr-2">✅</span>Expert Technicians – Skilled professionals using advanced techniques.</li>
-          <li className="flex items-start"><span className="text-green-400 mr-2">✅</span>High-Quality Products – Eco-friendly and premium-grade cleaning solutions.</li>
-          <li className="flex items-start"><span className="text-green-400 mr-2">✅</span>Advanced Equipment – Steam cleaning, clay bar treatment, and paint protection technology.</li>
-          <li className="flex items-start"><span className="text-green-400 mr-2">✅</span>Affordable Packages – Custom detailing options to fit your needs and budget.</li>
+          <li className="flex items-start"><span className="text-green-400 mr-2">✅</span>Eco-Friendly Products – Safe, high-quality cleaning agents.</li>
+          <li className="flex items-start"><span className="text-green-400 mr-2">✅</span>Expert Technicians – Skilled professionals ensuring a showroom-like finish.</li>
+          <li className="flex items-start"><span className="text-green-400 mr-2">✅</span>Convenient Packages – Affordable and tailored services for every car owner..</li>
+          
         </ul>
       </div>
 
@@ -119,4 +111,4 @@ const Detailing = () => {
   );
 };
 
-export default Detailing;
+export default Washing;
