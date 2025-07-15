@@ -15,27 +15,36 @@ const Navbar = () => {
     { label: "Contact", href: "/contact" },
   ];
 
-  // Close sidebar when clicking outside
+  // Close sidebar when clicking outside or when resizing to desktop
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
         setIsOpen(false);
       }
     };
+
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsOpen(false);
+      }
+    };
+
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
     }
+
+    window.addEventListener("resize", handleResize);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("resize", handleResize);
     };
   }, [isOpen]);
 
   return (
     <nav className="bg-orange-500 text-white shadow-md sticky top-0 z-50">
       <div className="max-w-screen-xl mx-auto px-4 py-3 flex justify-between items-center">
-        <div className="text-xl font-bold">BrandLogo</div>
+        <div className="text-xl font-bold">CS Car Saloon</div>
 
         {/* Desktop Nav */}
         <div className="hidden lg:flex gap-6 items-center font-medium">
@@ -51,11 +60,15 @@ const Navbar = () => {
             )
           )}
           <Link
-            to="/booking"
-            className="ml-4 bg-white text-black hover:bg-black hover:text-white px-4 py-2 rounded-full transition"
-          >
-            Book Now
-          </Link>
+  to="/booking"
+  className="relative ml-4 px-4 py-2 rounded-full bg-white text-black overflow-hidden group "
+>
+  <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
+    Book Now
+  </span>
+  <span className="absolute inset-0 bg-black z-0 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></span>
+</Link>
+
         </div>
 
         {/* Hamburger */}

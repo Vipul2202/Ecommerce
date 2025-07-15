@@ -82,7 +82,7 @@ const Footer = () => {
                         behavior: "smooth",
                     })
                 }
-                className="fixed bottom-4 right-4 bg-orange-500 p-3 rounded-full text-white shadow-lg hover:bg-blue-900"
+                className="fixed bottom-4 right-4 bg-orange-500 p-3 rounded-full text-white shadow-lg hover:bg-white hover:text-black"
                 title="Back to top"
             >
                 <FaChevronUp />
