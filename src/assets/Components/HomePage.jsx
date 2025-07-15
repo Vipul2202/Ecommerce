@@ -107,28 +107,29 @@ const services = [
   };
 
   return (
-    <div className="text-white  mx-auto  ">
+    <div className="text-white  mx-auto  bg-black">
       {/* Carousel Section */}
-      <div className="w-full overflow-hidden relative">
-        <Slider {...settings}>
-          {carouselData.map((item, index) => (
-            <div
-              key={index}
-              className="relative h-[24rem] md:h-[32rem] lg:h-[36rem]"
-            >
-              <img
-                src={item.img}
-                alt={`carousel-${index}`}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center px-4">
-                <h3 className="text-xl md:text-2xl font-light">{item.subtitle}</h3>
-                <h1 className="text-2xl md:text-4xl font-bold">{item.title}</h1>
-              </div>
-            </div>
-          ))}
-        </Slider>
+     <div className="overflow-hidden relative max-w-screen-2xl mx-auto px-4 ">
+  <Slider {...settings}>
+    {carouselData.map((item, index) => (
+      <div
+        key={index}
+        className="relative h-[24rem] md:h-[32rem] lg:h-[36rem]"
+      >
+        <img
+          src={item.img}
+          alt={`carousel-${index}`}
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center px-4">
+          <h3 className="text-xl md:text-2xl font-light text-white">{item.subtitle}</h3>
+          <h1 className="text-2xl md:text-4xl font-bold text-white">{item.title}</h1>
+        </div>
       </div>
+    ))}
+  </Slider>
+</div>
+
 
       <section className="py-12 bg-black" id="about">
         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
@@ -151,7 +152,7 @@ const services = [
       </section>
 
 
-     <div className="min-h-screen bg-black text-white py-12 px-4 sm:px-6 lg:px-8">
+     <div className="bg-black text-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
      
         <div className="text-center mb-16">

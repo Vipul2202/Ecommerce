@@ -16,7 +16,7 @@ const About = () => {
  
 
   return (
-    <div className="flex flex-col min-h-screen bg-black text-white">
+    <div className="flex flex-col  bg-black text-white h-full">
       {/* Header */}
       <div className="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-orange-500 mb-4">

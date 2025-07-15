@@ -147,7 +147,7 @@ const plans = [
   return (
     <div className="text-white">
     
-      <div className="min-h-screen bg-black text-white py-16 px-4 sm:px-6 lg:px-8">
+      <div className=" bg-black text-white py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
     
           <div className="text-center mb-16">
@@ -200,7 +200,7 @@ const plans = [
           </div>
         </div>
       </div>
- <div className="min-h-screen bg-black text-white py-12 px-4 sm:px-6 lg:px-8 relative">
+ <div className=" bg-black text-white py-12 px-4 sm:px-6 lg:px-8 relative">
       <div className="max-w-7xl mx-auto">
        
         <div className="text-center mb-16">
@@ -289,7 +289,7 @@ const plans = [
       </div>
     </div>
 
-   <div className="min-h-screen bg-black text-white py-12 px-4 sm:px-6 lg:px-8 relative">
+   <div className=" bg-black text-white py-12 px-4 sm:px-6 lg:px-8 relative">
       <div className="max-w-7xl mx-auto">
      
         <div className="text-center mb-16">
