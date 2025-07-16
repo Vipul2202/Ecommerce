@@ -87,6 +87,7 @@ const Washing = () => {
                 <img
                   src={item.image}
                   alt={item.title}
+                  draggable="false"
                   className="w-full h-full object-cover"
                 />
               </div>

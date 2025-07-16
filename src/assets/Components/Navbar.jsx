@@ -351,7 +351,7 @@ const Navbar = () => {
                     {/* Centered circular social icons */}
                     <div className="mt-6 flex justify-center items-center gap-6">
                       <button className="w-12 h-12 flex items-center justify-center rounded-full bg-white shadow hover:shadow-lg">
-                        <img src={GoogleLogo} alt="Google" className="w-6 h-6" />
+                        <img src={GoogleLogo} draggable="false" alt="Google" className="w-6 h-6" />
                       </button>
                       <button className="w-12 h-12 flex items-center justify-center rounded-full bg-blue-600 text-white hover:bg-blue-700">
                         <FaFacebook size={20} />

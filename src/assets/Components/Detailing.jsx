@@ -93,6 +93,7 @@ const Detailing = () => {
             >
               <div className="h-48 overflow-hidden">
                 <img
+                draggable="false"
                   src={item.image}
                   alt={item.title}
                   className="w-full h-full object-cover"

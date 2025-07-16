@@ -160,6 +160,7 @@ const Extras = () => {
                   <img
                     src={sedan}
                     alt="Service"
+                    draggable="false"
                     className="w-16 h-16 object-cover rounded-full"
                   />
                   <p className="text-white font-semibold text-sm">{card.price}</p>

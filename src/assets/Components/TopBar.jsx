@@ -11,6 +11,7 @@ const TopBar = () => {
           <div className="w-full lg:w-auto flex justify-center lg:justify-start">
             <a href="/" className="block w-20">
               <img
+                draggable="false"
                 src={logo}
                 alt="CarSaloon Logo"
                 className="w-full h-auto object-contain"

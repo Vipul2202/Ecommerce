@@ -119,6 +119,7 @@ const services = [
         <img
           src={item.img}
           alt={`carousel-${index}`}
+          draggable="false"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center px-4">
@@ -133,7 +134,7 @@ const services = [
 
       <section className="py-12 bg-black" id="about">
         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
-          <img src={about} alt="About" className="w-full md:w-1/2 rounded-lg" />
+          <img src={about} alt="About"  draggable="false" className="w-full md:w-1/2 rounded-lg" />
           <div className="md:w-1/2">
             <div className="text-orange-500 font-bold mb-4 border-b-2 border-orange-500 pb-1 inline-block">
               About

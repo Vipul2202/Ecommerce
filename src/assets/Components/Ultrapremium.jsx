@@ -153,6 +153,7 @@ const Ultrapremium = () => {
               <div className="">
                 <div className="flex items-center gap-2">
                   <img
+                  draggable="false"
                     src={sedan}
                     alt="Service"
                     className="w-16 h-16 object-cover rounded-full"
