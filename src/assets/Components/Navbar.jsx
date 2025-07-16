@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 import GoogleLogo from "../../img/images.png";
+import axios from "axios";
+import { toast } from "react-toastify";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -53,39 +56,69 @@ const Navbar = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (forgotMode) {
-      if (!form.email) {
-        alert("Please enter your email to reset password.");
-        return;
-      }
-      alert(`Reset password link sent to ${form.email}`);
+  if (forgotMode) {
+    if (!form.email) {
+      toast.error("Please enter your email to reset password.");
+      return;
+    }
+    try {
+      await axios.post("/api/user/forgot-password", { email: form.email });
+      toast.success(`Reset link sent to ${form.email}`);
       setShowModal(false);
       setForgotMode(false);
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Failed to send reset email.");
+    }
+    return;
+  }
+
+  if (!isLogin) {
+    // Registration
+    if (!form.name || !form.email || !form.phone || !form.password || !form.confirmPassword) {
+      toast.error("All fields are required");
+      return;
+    }
+    if (form.password !== form.confirmPassword) {
+      toast.error("Passwords do not match");
       return;
     }
 
-    if (!isLogin) {
-      if (!form.name || !form.email || !form.phone || !form.password || !form.confirmPassword) {
-        alert("All fields are required");
-        return;
-      }
-      if (form.password !== form.confirmPassword) {
-        alert("Passwords do not match");
-        return;
-      }
-    } else {
-      if (!form.email || !form.password) {
-        alert("Email and Password are required");
-        return;
-      }
+    try {
+      const res = await axios.post("/api/user/register", {
+        name: form.name,
+        email: form.email,
+    // added phone if your backend expects it
+        password: form.password,
+      });
+      toast.success("Registration successful!");
+      localStorage.setItem("token", res.data.token);
+      setShowModal(false);
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Registration failed.");
+    }
+  } else {
+    // Login
+    if (!form.email || !form.password) {
+      toast.error("Email and Password are required");
+      return;
     }
 
-    alert("Form submitted successfully!");
-    setShowModal(false);
-  };
+    try {
+      const res = await axios.post("/api/user/login", {
+        email: form.email,
+        password: form.password,
+      });
+      toast.success("Login successful!");
+      localStorage.setItem("token", res.data?.data?.token);
+      setShowModal(false);
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Login failed.");
+    }
+  }
+};
 
 
   return (

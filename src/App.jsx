@@ -1,12 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import TopBar from './assets/Components/TopBar'
 import Navbar from './assets/Components/Navbar'
 import HomePage from './assets/Components/HomePage'
 import Homenext from './assets/Components/Homenext'
 import Footer from './assets/Components/Footer'
-// import ContactUs from './pages/ContactUs' 
 import ContactUs from './assets/Components/Contactus'
 import BookNow from './assets/Components/BookNow'
 import Extras from './assets/Components/Extras'
@@ -14,9 +16,11 @@ import Ultrapremium from './assets/Components/Ultrapremium'
 import Detailing from './assets/Components/Detailing'
 import Washing from './assets/Components/Washing'
 import About from './assets/Components/About'
+
 function App() {
   return (
-    <div className=''>
+    <div >
+      <ToastContainer position="top-right" autoClose={3000} />
       <Router>
         <TopBar />
         <Navbar />
