@@ -71,7 +71,10 @@ const Navbar = () => {
         return;
       }
       try {
-        await axios.post("/api/user/forgot-password", { email: form.email });
+       await axios.post("http://localhost:9006/user/forgot-password", {
+  email: form.email,
+});
+
         toast.success(`Reset link sent to ${form.email}`);
         setShowModal(false);
         setForgotMode(false);
@@ -80,6 +83,7 @@ const Navbar = () => {
       }
       return;
     }
+
 
     if (!isLogin) {
       if (!form.name || !form.email || !form.phone || !form.password || !form.confirmPassword) {
