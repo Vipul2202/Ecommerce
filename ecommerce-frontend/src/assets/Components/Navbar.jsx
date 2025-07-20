@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+ const dropdownRef = useRef(null);
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [forgotMode, setForgotMode] = useState(false);
@@ -27,7 +29,7 @@ const Navbar = () => {
     { label: "Home", href: "/" },
     { label: "Products", href: "/products" },
     { label: "Extras", href: "/extras" },
-    {label: "Gallery", href: "/gallery"},
+    { label: "Gallery", href: "/gallery" },
   ];
 
   useEffect(() => {
@@ -136,68 +138,71 @@ const Navbar = () => {
     <>
       <nav className="bg-[#00a0db] text-white sticky top-0 z-50 shadow-2xl">
         <div className="max-w-screen-xl mx-auto px-4 py-3 flex justify-between items-center">
-
-
-          <div className="hidden lg:flex gap-6 items-center font-medium">
-            {navItems.map((item, index) => (
-              <Link to={item.href} key={index} className="hover:text-black">
-                {item.label}
-              </Link>
-            ))}
-
-            {/* Services Dropdown */}
-            <div className="relative group">
-  <button className="hover:text-black">Services</button>
-  <div className="absolute top-full left-0 mt-2 w-56 bg-white text-black rounded-xl shadow-lg hidden group-hover:block z-50">
-    <Link to="/washing" className="block px-4 py-2 hover:bg-gray-100 border-b border-gray-300">Washing Services</Link>
-    <Link to="/detailing" className="block px-4 py-2 hover:bg-gray-100 border-b border-gray-300">Detailing Services</Link>
-    <Link to="/ultrapremium" className="block px-4 py-2 hover:bg-gray-100 border-b border-gray-300">Ultra Premium Services</Link>
-    
-  </div>
-</div>
-
-
-            <Link
-              to="/booking"
-              className="relative ml-4 px-4 py-2 rounded-full bg-white text-black overflow-hidden group"
-            >
-              <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
-                Book Now
-              </span>
-              <span className="absolute inset-0 bg-black z-0 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></span>
-            </Link>
-
-            {user ? (
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex justify-between items-center w-full font-medium">
+            {/* Left side: Navigation Links */}
+            <div className="flex gap-24 items-center">
+              {navItems.map((item, index) => (
+                <Link to={item.href} key={index} className="hover:text-black">
+                  {item.label}
+                </Link>
+              ))}
+              {/* Services Dropdown */}
               <div className="relative group">
-                <img
-                  src={`https://ui-avatars.com/api/?name=${user.name}&background=random`}
-                  alt="avatar"
-                  className="w-10 h-10 rounded-full cursor-pointer"
-                />
-                <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded shadow-lg p-3 hidden group-hover:block z-50">
-                  <p className="font-semibold">{user.name}</p>
-                  <p className="text-sm">{user.email}</p>
-                  <button
-                    onClick={handleLogout}
-                    className="mt-2 bg-[#00a0db] text-white w-full rounded py-1 hover:bg-red-600"
-                  >
-                    Logout
-                  </button>
+                <button className="hover:text-black">Services</button>
+                <div className="absolute top-full left-0 mt-2 w-56 bg-white text-black rounded-xl shadow-lg hidden group-hover:block z-50">
+                  <Link to="/washing" className="block px-4 py-2 hover:bg-gray-100 border-b border-gray-300">Washing Services</Link>
+                  <Link to="/detailing" className="block px-4 py-2 hover:bg-gray-100 border-b border-gray-300">Detailing Services</Link>
+                  <Link to="/ultrapremium" className="block px-4 py-2 hover:bg-gray-100  border-gray-300">Ultra Premium Services</Link>
                 </div>
               </div>
-            ) : (
-              <button
-                onClick={() => setShowModal(true)}
-                className="relative ml-4 px-4 py-2 rounded-full bg-white text-black overflow-hidden group"
+            </div>
+
+            {/* Right side: Book Now & Profile */}
+            <div className="flex items-center gap-4 ml-auto">
+              <Link
+                to="/booking"
+                className="relative px-4 py-2 rounded-full bg-white text-black overflow-hidden group"
               >
                 <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
-                  Register
+                  Book Now
                 </span>
                 <span className="absolute inset-0 bg-black z-0 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></span>
-              </button>
-            )}
+              </Link>
+
+              {user ? (
+                <div className="relative group">
+                  <img
+                    src={`https://ui-avatars.com/api/?name=${user.name}&background=random`}
+                    alt="avatar"
+                    className="w-10 h-10 rounded-full cursor-pointer"
+                  />
+                  <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded shadow-lg p-3 hidden group-hover:block z-50">
+                    <p className="font-semibold">{user.name}</p>
+                    <p className="text-sm">{user.email}</p>
+                    <button
+                      onClick={handleLogout}
+                      className="mt-2 bg-[#00a0db] text-white w-full rounded py-1 hover:bg-red-600"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setShowModal(true)}
+                  className="relative px-4 py-2 rounded-full bg-white text-black overflow-hidden group"
+                >
+                  <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
+                    Register
+                  </span>
+                  <span className="absolute inset-0 bg-black z-0 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></span>
+                </button>
+              )}
+            </div>
           </div>
 
+          {/* Hamburger Button */}
           <button
             className="lg:hidden focus:outline-none z-50"
             onClick={() => setIsOpen(true)}
@@ -208,12 +213,11 @@ const Navbar = () => {
           </button>
         </div>
 
+        {/* Mobile Sidebar */}
         {isOpen && <div className="fixed inset-0 bg-black bg-opacity-30 z-40"></div>}
-
         <div
           ref={sidebarRef}
-          className={`fixed top-0 right-0 h-full w-64 bg-white text-black z-50 transform transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "translate-x-full"
-            }`}
+          className={`fixed top-0 right-0 h-full w-64 bg-white text-black z-50 transform transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "translate-x-full"}`}
         >
           <div className="p-5 flex flex-col gap-5">
             <button className="self-end text-gray-500 hover:text-black" onClick={() => setIsOpen(false)}>
@@ -224,18 +228,14 @@ const Navbar = () => {
                 {item.label}
               </Link>
             ))}
-
-            {/* Mobile Services Links */}
-           <div className="relative group">
-  <button className="hover:text-black">Services</button>
-  <div className="absolute top-full left-0 mt-2 w-56 bg-white text-black rounded-xl shadow-lg hidden group-hover:block z-50">
-    <Link to="/washing" className="block px-4 py-2 hover:bg-gray-100 border-b border-gray-300">Washing Services</Link>
-    <Link to="/detailing" className="block px-4 py-2 hover:bg-gray-100 border-b border-gray-300">Detailing Services</Link>
-    <Link to="/ultrapremium" className="block px-4 py-2 hover:bg-gray-100 border-b border-gray-300">Ultra Premium Services</Link>
-   
-  </div>
-</div>
-
+            <div className="relative group">
+              <button className="hover:text-black">Services</button>
+              <div className="absolute top-full left-0 mt-2 w-56 bg-white text-black rounded-xl shadow-lg hidden group-hover:block z-50">
+                <Link to="/washing" className="block px-4 py-2 hover:bg-gray-100 border-b border-gray-300">Washing Services</Link>
+                <Link to="/detailing" className="block px-4 py-2 hover:bg-gray-100 border-b border-gray-300">Detailing Services</Link>
+                <Link to="/ultrapremium" className="block px-4 py-2 hover:bg-gray-100 border-b border-gray-300">Ultra Premium Services</Link>
+              </div>
+            </div>
             <Link
               to="/booking"
               onClick={() => setIsOpen(false)}
@@ -247,7 +247,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Auth Modal stays unchanged (you already had it complete and clean) */}
+      {/* Auth Modal */}
       {showModal && (
         <>
           <style>{`body { overflow: hidden; }`}</style>
@@ -271,19 +271,12 @@ const Navbar = () => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 {forgotMode ? (
                   <>
-                    <input
-                      name="email"
-                      placeholder="Enter your email"
-                      className="w-full border p-2 rounded"
-                      onChange={handleFormChange}
-                    />
+                    <input name="email" placeholder="Enter your email" className="w-full border p-2 rounded" onChange={handleFormChange} />
                     <button type="submit" className="w-full bg-orange-500 text-white p-2 rounded hover:bg-orange-600">
                       Send Reset Link
                     </button>
                     <div className="text-center text-sm text-blue-600 hover:underline mt-2">
-                      <button type="button" onClick={() => setForgotMode(false)}>
-                        Back to Login
-                      </button>
+                      <button type="button" onClick={() => setForgotMode(false)}>Back to Login</button>
                     </div>
                   </>
                 ) : (
@@ -311,9 +304,7 @@ const Navbar = () => {
                     )}
                     {isLogin && (
                       <div className="text-right">
-                        <button type="button" className="text-blue-600 text-sm hover:underline" onClick={() => setForgotMode(true)}>
-                          Forgot Password?
-                        </button>
+                        <button type="button" className="text-blue-600 text-sm hover:underline" onClick={() => setForgotMode(true)}>Forgot Password?</button>
                       </div>
                     )}
                     <button type="submit" className="w-full bg-orange-500 text-white p-2 rounded hover:bg-orange-600">
@@ -321,10 +312,7 @@ const Navbar = () => {
                     </button>
                     <div className="flex justify-between items-center text-sm text-gray-500">
                       <span>{isLogin ? "Don't have an account?" : "Already have an account?"}</span>
-                      <button type="button" onClick={() => {
-                        setIsLogin(!isLogin);
-                        setShowPassword(false);
-                      }} className="text-blue-600 hover:underline">
+                      <button type="button" onClick={() => { setIsLogin(!isLogin); setShowPassword(false); }} className="text-blue-600 hover:underline">
                         {isLogin ? "Register" : "Login"}
                       </button>
                     </div>

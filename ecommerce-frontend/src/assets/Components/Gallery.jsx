@@ -6,10 +6,10 @@ import img2 from '../../img/blog-3.jpg';
 import img3 from '../../img/single.jpg'; // repeat for demo
 
 const imagePairs = [
-  { before: blog, after: single },
+  { before: blog, after: img1},
   { before: img1, after: img2 },
   { before: img2, after: img3 },
-  { before: single, after: blog },
+  { before: img1, after: blog },
   { before: img1, after: img3 },
   { before: img3, after: blog },
 ];
