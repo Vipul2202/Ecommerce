@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import sedan from "../../../src/img/sedan.png";
-
+import back from "../../../src/img/back.jpg";
+import carousal from "../../../src/img/carousel-1.jpg";
 const Extras = () => {
   const [formData, setFormData] = useState({
     carType: "",
@@ -92,37 +93,47 @@ const Extras = () => {
   ];
 
   return (
-    <div className="flex flex-col  bg-black text-white">
+    <div className="flex flex-col  text-white">
       {/* Header */}
-      <div className="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-orange-500 mb-4">
-          Touch Up Services
-        </h1>
-        <nav className="text-gray-600">
-          <span className="text-orange-500">Home</span>
-          <span className="mx-2">/</span>
-          <span>Extras</span>
-        </nav>
-      </div>
+<div
+  className="bg-black bg-cover bg-center py-20 px-4 sm:px-6 lg:px-8 text-center relative"
+  style={{
+    backgroundImage: `url(${carousal})`,
+  }}
+>
+  <div className="absolute inset-0 bg-black opacity-60"></div> {/* dark overlay */}
+
+  <div className="relative z-10">
+    <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+      Touch Up Services
+    </h1>
+    <nav className="text-gray-200">
+      <span className="text-white">Home</span>
+      <span className="mx-2">/</span>
+      <span>Extras</span>
+    </nav>
+  </div>
+</div>
+
 
       {/* Centered Description */}
-      <div className="text-center px-4 py-8">
+      <div className="text-center px-4 py-8 text-black">
         <h1 className="text-2xl font-semibold mb-4">About Our Touch Up Service</h1>
-        <p className="max-w-4xl mx-auto text-lg text-white">
+        <p className="max-w-4xl mx-auto text-lg text-black">
           Achieve a flawless finish with Paintless Dent Removal, Buff and Polish, Headlight Restoration, Leather Clean, Seat Steam Clean, and Dog Hair Removal, leaving your vehicle looking and feeling like new.
         </p>
       </div>
 
       {/* Cards Section */}
-      <div className="max-w-4xl mx-auto px-4 py-10">
+      <div className="max-w-4xl mx-auto px-4 py-10 bg-white">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {serviceCards.map((card, index) => (
             <div
               key={index}
-              className="bg-orange-600 p-6 rounded-lg flex flex-col justify-between"
+              className="bg-[#00a0db] p-6 rounded-lg flex flex-col justify-between "
             >
               <div>
-                <h2 className="text-lg font-bold mb-2">{card.title}</h2>
+                <h2 className="text-lg font-bold mb-2 ">{card.title}</h2>
                 <p className="text-sm mb-2">{card.Paragraph}</p>
 
                 {/* What We Offer */}
