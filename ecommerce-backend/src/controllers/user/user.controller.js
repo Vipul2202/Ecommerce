@@ -12,7 +12,7 @@ exports.register = async (req, res) => {
     console.log("req.body", req.body);
 
     if (!name || !email || !password) {
-      return res.status(400).json({ message: "Missing required fields" });
+      return res.status(400).json({ message: "Missing required fields" }); 
     }
 
     const userExists = await User.findOne({ email });
