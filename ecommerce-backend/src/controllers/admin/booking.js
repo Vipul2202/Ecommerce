@@ -20,6 +20,7 @@ exports.bookingList = async (req, res) => {
     if (status) {
       query.status = status;
     }
+    query.is_verified = true;
     const booking = await Booking.find(query)
       .limit(limit)
       .skip(offset)
@@ -36,11 +37,11 @@ exports.bookingList = async (req, res) => {
 
 exports.changeBookingStatus = async (req, res) => {
   try {
-    const { id, status } = req.body;
+    const { id, status, reason } = req.body;
     if (status === "approved") {
       const booking = await Booking.findByIdAndUpdate(
         id,
-        { status },
+        { booking_status: status },
         { new: true }
       );
       const datatosend = {
@@ -65,11 +66,11 @@ exports.changeBookingStatus = async (req, res) => {
       });
       return res.status(200).json({ message: "Booking status updated successfully" });
     } else if (status === "cancelled") {
-      const booking = await Booking.findByIdAndUpdate(
-        id,
-        { status },
-        { new: true }
-      );
+     const booking = await Booking.findByIdAndUpdate(
+  id,
+  { booking_status: status, booking_cancel_reason: reason },
+  { new: true }
+);
       const datatosend = {
         booking_id: booking.booking_id,
         car_type: booking.car_type,
@@ -97,3 +98,16 @@ exports.changeBookingStatus = async (req, res) => {
     utils.handleError(res, error);
   }
 };
+exports.getSingleBooking = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const booking = await Booking.findById(id);
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
+    return res.status(200).json({ data:booking, message: "Booking fetched successfully" });
+  } catch (error) {
+    console.log(error);
+    utils.handleError(res, error);
+  }
+}

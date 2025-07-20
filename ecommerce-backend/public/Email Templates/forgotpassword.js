@@ -235,6 +235,62 @@ exports.getBookingCancellationEmail = (booking) => {
     </div>
   `;
 };
+exports.getAdminNewBookingEmail = (booking) => {
+  const {
+    booking_id,
+    car_type,
+    vehicle_registration,
+    services,
+    booking_date,
+    booking_time,
+    first_name,
+    last_name,
+    email,
+    phone,
+    booking_status
+  } = booking;
+
+  return `
+    <div style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 30px;">
+      <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <tr>
+          <td style="padding: 20px 30px; background-color: #17a2b8; color: #ffffff;">
+            <h1 style="margin: 0; font-size: 24px;">New Booking Received</h1>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 30px;">
+            <p style="font-size: 16px; color: #333;">Hello Admin,</p>
+            <p style="font-size: 15px; color: #555;">
+              A new booking has been submitted with the following details:
+            </p>
+            <table style="font-size: 15px; color: #333; margin-top: 20px;">
+              <tr><td><strong>Booking ID:</strong></td><td>${booking_id}</td></tr>
+              <tr><td><strong>Car Type:</strong></td><td>${car_type}</td></tr>
+              <tr><td><strong>Vehicle Registration:</strong></td><td>${vehicle_registration}</td></tr>
+              <tr><td><strong>Services:</strong></td><td>${services.join(', ')}</td></tr>
+              <tr><td><strong>Booking Date:</strong></td><td>${new Date(booking_date).toLocaleDateString()}</td></tr>
+              <tr><td><strong>Booking Time:</strong></td><td>${new Date(booking_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td></tr>
+              <tr><td><strong>Customer Name:</strong></td><td>${first_name} ${last_name}</td></tr>
+              <tr><td><strong>Email:</strong></td><td>${email}</td></tr>
+              <tr><td><strong>Phone:</strong></td><td>${phone}</td></tr>
+              <tr><td><strong>Status:</strong></td><td><strong style="color: #ffc107;">${booking_status}</strong></td></tr>
+            </table>
+            <p style="margin-top: 30px; font-size: 14px; color: #777;">
+              Please review and take any necessary actions in your admin dashboard.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 20px 30px; background-color: #f0f0f0; text-align: center; color: #666; font-size: 13px;">
+            &copy; ${new Date().getFullYear()} Your App. All rights reserved.
+          </td>
+        </tr>
+      </table>
+    </div>
+  `;
+};
+
 
 
 
