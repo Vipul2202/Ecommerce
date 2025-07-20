@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors=require('cors')
 const userRoutes = require('./src/routes/user')
+const adminRoutes=require('./src/routes/admin')
 const fileUpload = require('express-fileupload')
 const initMongo = require("./src/config/mongo");
 const app = express();
@@ -23,6 +24,7 @@ app.use(
 );
 app.use(express.json())
 app.use('/user', userRoutes)
+app.use('/admin', adminRoutes)
 app.get("/", (req, res) => {
   return res.send("Welcome to Inlinkpay E-commerce Backend");
 });

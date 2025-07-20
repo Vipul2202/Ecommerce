@@ -145,3 +145,12 @@ exports.generate8CharAlphanumericPassword= function() {
   }
   return password;
 }
+exports.generateBookingId = () => {
+  const prefix = "BOOKING";
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const randomPart = Array.from({ length: 8 }, () =>
+    characters.charAt(Math.floor(Math.random() * characters.length))
+  ).join("");
+  
+  return prefix + randomPart;
+};

@@ -21,7 +21,6 @@ import CarDetailPage from './assets/Components/CarDetailPage'
 // import BeforeAfterGallery from './assets/Components/BeforeAfterGallery'
 // import Gallery from './assets/Components/Gallery'
 import Gallery from './assets/Components/Gallery'
-import ForgotPasswordReset from './assets/Components/ForgotPasswordReset'
 function App() {
   return (
     <div>
@@ -50,8 +49,6 @@ function App() {
           <Route path="/products" element={<Products />} />
               <Route path="/car/:id" element={<CarDetailPage />} />
           <Route path='gallery' element={<Gallery />} />
-          <Route path="/reset-password/:id" element={<ForgotPasswordReset />} />
-
         </Routes>
 
         <Footer />

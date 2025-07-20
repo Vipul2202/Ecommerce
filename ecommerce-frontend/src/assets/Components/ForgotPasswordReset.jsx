@@ -1,27 +1,19 @@
 import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import axios from "axios";
 
 const ForgotPasswordReset = () => {
-  const [searchParams] = useSearchParams();
-  const token = searchParams.get("token");
-
+  const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!newPassword || !confirmPassword) {
+    if (!oldPassword || !newPassword) {
       alert("Please fill in all fields");
       return;
     }
 
-    if (newPassword !== confirmPassword) {
-      alert("Passwords do not match.");
-      return;
-    }
 
+<<<<<<< HEAD
     try {
       await axios.post(import.meta.env.VITE_RESET_PASSWORD_API, {
         token,
@@ -32,32 +24,36 @@ const ForgotPasswordReset = () => {
     } catch (err) {
       alert(err.response?.data?.message || "Failed to reset password.");
     }
+=======
+    alert("Password has been updated successfully.");
+>>>>>>> ba7d37b12fcc61d030d534728e8d441400589f6e
   };
 
-  return (
+  return (git config --global pull.rebase false
+
     <div className="min-h-screen bg-black flex items-center justify-center px-4">
       <div className="bg-white shadow-xl rounded-xl p-8 max-w-md w-full">
         <h2 className="text-2xl font-bold text-center text-[#00a0db] mb-6">
           Reset Your Password
         </h2>
         <form onSubmit={handleSubmit}>
-          <label className="block text-black mb-2">New Password</label>
+          <label className="block text-black mb-2">new Password</label>
           <input
             type="password"
             className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#00a0db]"
-            placeholder="Enter new password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
+            placeholder="Enter old password"
+            value={oldPassword}
+            onChange={(e) => setOldPassword(e.target.value)}
             required
           />
 
-          <label className="block text-black mb-2">Confirm Password</label>
+          <label className="block text-black mb-2">confirm Password</label>
           <input
             type="password"
             className="w-full p-3 mb-6 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#00a0db]"
-            placeholder="Confirm new password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Enter new password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
             required
           />
 
