@@ -151,7 +151,7 @@ const plans = [
         <div className="max-w-7xl mx-auto">
     
           <div className="text-center mb-16">
-            <h2 className="text-orange-400 text-sm font-semibold tracking-wider uppercase mb-4">
+            <h2 className="text-[#00a0db] text-sm font-semibold tracking-wider uppercase mb-4">
               HAVE A LOOK AT OUR PREMIUM SERVICES
             </h2>
             <h1 className="text-4xl md:text-5xl font-bold">
@@ -178,7 +178,7 @@ const plans = [
                 </div>
 
               
-                <div className="p-4 bg-orange-500 text-white flex flex-col items-start justify-between h-full">
+                <div className="p-4 bg-[#00a0db] text-white flex flex-col items-start justify-between h-full">
                   <h3 className="text-lg font-semibold">{item.title}</h3>
                   <p className="text-sm mb-4">{item.price}</p>
                   <button
@@ -196,7 +196,7 @@ const plans = [
           </div>
 
           <div className="text-center mt-16">
-            <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+            <button className="bg-[#00a0db] hover:bg-[#00a0db] text-white font-semibold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
               Explore All Services
             </button>
           </div>
@@ -206,7 +206,7 @@ const plans = [
       <div className="max-w-7xl mx-auto">
        
         <div className="text-center mb-16">
-          <h2 className="text-orange-400 text-sm font-semibold tracking-wider uppercase mb-4">
+          <h2 className="text-[#00a0db] text-sm font-semibold tracking-wider uppercase mb-4">
             DETAILING SERVICES
           </h2>
           <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white">
@@ -215,13 +215,13 @@ const plans = [
         </div>
 
  
-        <div className="bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500 rounded-3xl p-1 shadow-2xl">
-          <div className="bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500 rounded-3xl p-8 lg:p-12">
+        <div className="bg-gradient-to-r from-[#00a0db] via-[#00a0db] to-[#00a0db] rounded-3xl p-1 shadow-2xl">
+          <div className="bg-gradient-to-r from-[#00a0db] via-[#00a0db] to-[#00a0db] rounded-3xl p-8 lg:p-12">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
               {plans.map((plan, index) => (
                 <div
                   key={plan.id}
-                  className={`relative bg-gradient-to-b from-orange-400 to-orange-500 rounded-2xl p-8 lg:p-10 min-h-[600px] lg:min-h-[650px] flex flex-col transform hover:scale-105 transition-all duration-300 ${
+                  className={`relative bg-gradient-to-b from-[#00a0db] to-[#00a0db] rounded-2xl p-8 lg:p-10 min-h-[600px] lg:min-h-[650px] flex flex-col transform hover:scale-105 transition-all duration-300 ${
                     plan.popular ? 'ring-4 ring-white/20 lg:scale-105' : ''
                   }`}
                 >
@@ -250,7 +250,7 @@ const plans = [
                       <div key={featureIndex} className="flex items-start space-x-3">
                         <div className="flex-shrink-0 mt-1">
                           <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
-                            <Check className="w-3 h-3 text-orange-500" />
+                            <Check className="w-3 h-3 text-[#00a0db]" />
                           </div>
                         </div>
                         <span className="text-white text-sm lg:text-base leading-relaxed">
@@ -276,7 +276,7 @@ const plans = [
      
                   {plan.popular && (
                     <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                      <div className="bg-white text-orange-500 px-4 py-1 rounded-full text-xs font-bold">
+                      <div className="bg-white text-[#00a0db] px-4 py-1 rounded-full text-xs font-bold">
                         MOST POPULAR
                       </div>
                     </div>
@@ -295,7 +295,7 @@ const plans = [
       <div className="max-w-7xl mx-auto">
      
         <div className="text-center mb-16">
-          <h2 className="text-orange-400 text-sm font-semibold tracking-wider uppercase mb-4">
+          <h2 className="text-[#00a0db] text-sm font-semibold tracking-wider uppercase mb-4">
             DETAILING SERVICES
           </h2>
           <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white">
@@ -304,13 +304,13 @@ const plans = [
         </div>
 
        
-        <div className="bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500 rounded-3xl p-1 shadow-2xl">
-          <div className="bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500 rounded-3xl p-8 lg:p-12">
+        <div className="bg-gradient-to-r from-[#00a0db] via-[#00a0db] to-[#00a0db] rounded-3xl p-1 shadow-2xl">
+          <div className="bg-gradient-to-r from-[#00a0db] via-[#00a0db] to-[#00a0db] rounded-3xl p-8 lg:p-12">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
               {plans.map((plan, index) => (
                 <div
                   key={plan.id}
-                  className={`relative bg-gradient-to-b from-orange-400 to-orange-500 rounded-2xl p-8 lg:p-10 min-h-[600px] lg:min-h-[650px] flex flex-col transform hover:scale-105 transition-all duration-300 ${
+                  className={`relative bg-gradient-to-b from-[#00a0db] to-[#00a0db] rounded-2xl p-8 lg:p-10 min-h-[600px] lg:min-h-[650px] flex flex-col transform hover:scale-105 transition-all duration-300 ${
                     plan.popular ? 'ring-4 ring-white/20 lg:scale-105' : ''
                   }`}
                 >
@@ -340,7 +340,7 @@ const plans = [
                       <div key={featureIndex} className="flex items-start space-x-3">
                         <div className="flex-shrink-0 mt-1">
                           <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
-                            <Check className="w-3 h-3 text-orange-500" />
+                            <Check className="w-3 h-3 text-[#00a0db]" />
                           </div>
                         </div>
                         <span className="text-white text-sm lg:text-base leading-relaxed">
@@ -366,7 +366,7 @@ const plans = [
                
                   {plan.popular && (
                     <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                      <div className="bg-white text-orange-500 px-4 py-1 rounded-full text-xs font-bold">
+                      <div className="bg-white text-[#00a0db] px-4 py-1 rounded-full text-xs font-bold">
                         MOST POPULAR
                       </div>
                     </div>

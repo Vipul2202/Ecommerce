@@ -136,7 +136,7 @@ const services = [
         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
           <img src={about} alt="About"  draggable="false" className="w-full md:w-1/2 rounded-lg" />
           <div className="md:w-1/2">
-            <div className="text-orange-500 font-bold mb-4 border-b-2 border-orange-500 pb-1 inline-block">
+            <div className="text-[#00a0db] font-bold mb-4 border-b-2 border-[#00a0db] pb-1 inline-block">
               About
             </div>
             <h2 className="text-3xl font-bold mb-4">Car Wash & Detailing</h2>
@@ -157,7 +157,7 @@ const services = [
       <div className="max-w-7xl mx-auto">
      
         <div className="text-center mb-16">
-          <h2 className="text-orange-400 text-sm font-semibold tracking-wider uppercase mb-4">
+          <h2 className="text-[#00a0db] text-sm font-semibold tracking-wider uppercase mb-4">
             WHAT WE DO?
           </h2>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
@@ -173,14 +173,14 @@ const services = [
               className="flex flex-col items-center text-center group hover:scale-105 transition-transform duration-300 cursor-pointer"
             >
       
-              <div className="mb-6 p-6 rounded-lg border-2 border-orange-400 bg-transparent hover:bg-orange-400/10 transition-colors duration-300">
-                <div className="text-orange-400 group-hover:text-orange-300 transition-colors duration-300">
+              <div className="mb-6 p-6 rounded-lg border-2 border-[#00a0db] bg-transparent hover:bg-[#00a0db]/10 transition-colors duration-300">
+                <div className="text-[#00a0db] group-hover:text-orange-300 transition-colors duration-300">
                   {service.icon}
                 </div>
               </div>
               
          
-              <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-orange-400 transition-colors duration-300">
+              <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-[#00a0db] transition-colors duration-300">
                 {service.title}
               </h3>
               
@@ -194,7 +194,7 @@ const services = [
 
         {/* Call to Action */}
         {/* <div className="text-center mt-16">
-          <button className="bg-orange-400 hover:bg-orange-500 text-black font-semibold py-4 px-8 rounded-lg transition-colors duration-300 transform hover:scale-105">
+          <button className="bg-[#00a0db] hover:bg-[#00a0db] text-black font-semibold py-4 px-8 rounded-lg transition-colors duration-300 transform hover:scale-105">
             Book Your Service
           </button>
         </div> */}
