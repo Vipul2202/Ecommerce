@@ -36,30 +36,46 @@ const BookNow = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const timeStr = formData.time;
+
+    if (!timeStr) {
+      alert("Please select a time.");
+      return;
+    }
+
+    const [hour, minute] = timeStr.split(":").map(Number);
+    const totalMinutes = hour * 60 + minute;
+
+    const minMinutes = 7 * 60;   // 07:00
+    const maxMinutes = 17 * 60;  // 17:00
+
+    if (totalMinutes < minMinutes || totalMinutes > maxMinutes) {
+      alert("Please select a time between 7:00 AM and 5:00 PM.");
+      return;
+    }
+
     console.log(formData);
   };
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">
-
       <div className="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-orange-500 mb-4">Book Now</h1>
+        <h1 className="text-4xl md:text-5xl font-bold text-[#00a0db] mb-4">Book Now</h1>
         <nav className="text-gray-600">
-          <span className="text-orange-500">Home</span>
+          <span className="text-[#00a0db]">Home</span>
           <span className="mx-2">/</span>
           <span>Contact</span>
         </nav>
       </div>
 
-
       <div className="flex justify-center items-center flex-1 px-4 py-10 bg-black">
         <div className="w-full max-w-4xl bg-black text-white">
-          <div className="bg-orange-600 text-center py-2 rounded mb-6 text-white font-semibold">
+          <div className="bg-[#00a0db] text-center py-2 rounded mb-6 text-white font-semibold">
             Book A Service
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="carType" className="block mb-1 font-medium text-white">Choose Car Type</label>
@@ -99,7 +115,7 @@ const BookNow = () => {
                     type="checkbox"
                     value={service}
                     onChange={handleServiceChange}
-                    className="accent-orange-500"
+                    className="accent-[#00a0db]"
                   />
                   <span>{service}</span>
                 </label>
@@ -109,89 +125,88 @@ const BookNow = () => {
             {/* Date & Time */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                  <label htmlFor="firstName" className="block mb-1 font-medium text-white">Date</label>
-              <input
-                type="date"
-                name="date"
-                value={formData.date}
-                onChange={handleChange}
-                className="p-2 text-black rounded w-full"
-              />
+                <label htmlFor="date" className="block mb-1 font-medium text-white">Date</label>
+                <input
+                  type="date"
+                  name="date"
+                  value={formData.date}
+                  onChange={handleChange}
+                  className="p-2 text-black rounded w-full"
+                />
               </div>
-<div>
-    <label htmlFor="firstName" className="block mb-1 font-medium text-white">Clock</label>
-              <input
-                type="time"
-                name="time"
-                value={formData.time}
-                onChange={handleChange}
-                className="p-2 text-black rounded w-full"
-              />
+              <div>
+                <label htmlFor="time" className="block mb-1 font-medium text-white">Clock</label>
+                <input
+                  type="time"
+                  name="time"
+                  value={formData.time}
+                  onChange={handleChange}
+                  className="p-2 text-black rounded w-full"
+                  min="07:00"
+                  max="17:00"
+                />
               </div>
             </div>
 
             {/* Name */}
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-  <div>
-    <label htmlFor="firstName" className="block mb-1 font-medium text-white">First Name</label>
-    <input
-      type="text"
-      id="firstName"
-      name="firstName"
-      placeholder="First Name"
-      value={formData.firstName}
-      onChange={handleChange}
-      className="p-2 text-black rounded w-full"
-    />
-  </div>
-  <div>
-    <label htmlFor="lastName" className="block mb-1 font-medium text-white">Last Name</label>
-    <input
-      type="text"
-      id="lastName"
-      name="lastName"
-      placeholder="Last Name"
-      value={formData.lastName}
-      onChange={handleChange}
-      className="p-2 text-black rounded w-full"
-    />
-  </div>
-</div>
-
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="firstName" className="block mb-1 font-medium text-white">First Name</label>
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  placeholder="First Name"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  className="p-2 text-black rounded w-full"
+                />
+              </div>
+              <div>
+                <label htmlFor="lastName" className="block mb-1 font-medium text-white">Last Name</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  placeholder="Last Name"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  className="p-2 text-black rounded w-full"
+                />
+              </div>
+            </div>
 
             {/* Email & Phone */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                  <label htmlFor="firstName" className="block mb-1 font-medium text-white">Email</label>
-          
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-                className="p-2 text-black rounded w-full"
-              />
-                  </div>
-                  <div>
-                     <label htmlFor="firstName" className="block mb-1 font-medium text-white">Phone Number</label>
-                
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Mobile Number"
-                value={formData.phone}
-                onChange={handleChange}
-                className="p-2 text-black rounded w-full"
-              />
-               </div>
+                <label htmlFor="email" className="block mb-1 font-medium text-white">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="p-2 text-black rounded w-full"
+                />
+              </div>
+              <div>
+                <label htmlFor="phone" className="block mb-1 font-medium text-white">Phone Number</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Mobile Number"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="p-2 text-black rounded w-full"
+                />
+              </div>
             </div>
 
             {/* Submit Button */}
             <div className="text-center">
               <button
                 type="submit"
-                className="bg-white text-black px-6 py-2 rounded-full font-semibold hover:bg-orange-500 hover:text-white transition"
+                className="bg-white text-black px-6 py-2 rounded-full font-semibold hover:bg-[#00a0db] hover:text-white transition"
               >
                 Submit
               </button>
@@ -201,7 +216,6 @@ const BookNow = () => {
       </div>
     </div>
   );
-
 };
 
 export default BookNow;

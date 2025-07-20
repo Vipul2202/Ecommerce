@@ -23,7 +23,7 @@ const ForgotPasswordReset = () => {
     }
 
     try {
-      await axios.post("http://localhost:9006/user/reset-password", {
+      await axios.post(import.meta.env.VITE_RESET_PASSWORD_API, {
         token,
         password: newPassword,
       });

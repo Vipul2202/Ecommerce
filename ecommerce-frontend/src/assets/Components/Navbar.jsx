@@ -71,9 +71,9 @@ const Navbar = () => {
         return;
       }
       try {
-       await axios.post("http://localhost:9006/user/forgot-password", {
-  email: form.email,
-});
+      await axios.post(import.meta.env.VITE_API_FORGOT_PASSWORD, {
+        email: form.email,
+      });
 
         toast.success(`Reset link sent to ${form.email}`);
         setShowModal(false);
@@ -96,7 +96,7 @@ const Navbar = () => {
       }
 
       try {
-        const res = await axios.post("http://localhost:9006/user/register", {
+        const res = await axios.post(import.meta.env.VITE_API_REGISTER, {
           name: form.name,
           email: form.email,
           phone: form.phone,
@@ -114,7 +114,7 @@ const Navbar = () => {
       }
 
       try {
-        const res = await axios.post("http://localhost:9006/user/login", {
+        const res = await axios.post(import.meta.env.VITE_API_LOGIN, {
           email: form.email,
           password: form.password,
         });
@@ -228,7 +228,7 @@ const Navbar = () => {
               ✕
             </button>
             {navItems.map((item, index) => (
-              <Link key={index} to={item.href} onClick={() => setIsOpen(false)} className="hover:text-orange-500">
+              <Link key={index} to={item.href} onClick={() => setIsOpen(false)} className="hover:text-[#00a0db]">
                 {item.label}
               </Link>
             ))}
@@ -243,7 +243,7 @@ const Navbar = () => {
             <Link
               to="/booking"
               onClick={() => setIsOpen(false)}
-              className="mt-3 text-center bg-orange-500 text-white py-2 rounded-full hover:bg-orange-600"
+              className="mt-3 text-center bg-[#00a0db] text-white py-2 rounded-full hover:bg-[#00a0db]"
             >
               Book Now
             </Link>
@@ -276,7 +276,7 @@ const Navbar = () => {
                 {forgotMode ? (
                   <>
                     <input name="email" placeholder="Enter your email" className="w-full border p-2 rounded" onChange={handleFormChange} />
-                    <button type="submit" className="w-full bg-orange-500 text-white p-2 rounded hover:bg-orange-600">
+                    <button type="submit" className="w-full bg-[#00a0db] text-white p-2 rounded hover:bg-[#00a0db]">
                       Send Reset Link
                     </button>
                     <div className="text-center text-sm text-blue-600 hover:underline mt-2">
@@ -311,7 +311,7 @@ const Navbar = () => {
                         <button type="button" className="text-blue-600 text-sm hover:underline" onClick={() => setForgotMode(true)}>Forgot Password?</button>
                       </div>
                     )}
-                    <button type="submit" className="w-full bg-orange-500 text-white p-2 rounded hover:bg-orange-600">
+                    <button type="submit" className="w-full bg-[#00a0db] text-white p-2 rounded hover:bg-[#00a0db]">
                       {isLogin ? "Login" : "Register"}
                     </button>
                     <div className="flex justify-between items-center text-sm text-gray-500">
