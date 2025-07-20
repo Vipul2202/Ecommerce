@@ -104,7 +104,7 @@ exports.login = async (req, res) => {
     });
 
     // Construct reset link
-    const resetLink = `${process.env.USER_FRONTEND_URL}pages/reset-password/${token}`;
+    const resetLink = `${process.env.USER_FRONTEND_URL}reset-password/${token}`;
     const html= getForgotPasswordEmail(user.name,resetLink)
 
     // Send email
