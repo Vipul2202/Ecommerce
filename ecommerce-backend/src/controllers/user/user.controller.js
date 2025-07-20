@@ -3,9 +3,10 @@ const { sendEmail } = require("../../utils/sendemail");
 const utils = require("../../utils/utils");
 const bcrypt = require("bcrypt-nodejs");
 const jwt = require("jsonwebtoken")
-const OTP=require('../../models/otp');
+const { v4: uuidv4 } = require("uuid");
+const Token=require('../../models/token.model')
 const Country=require('../../models/country')
-const { getOtpEmail } = require("../../../public/Email Templates/forgotpassword");
+const { getOtpEmail, getForgotPasswordEmail } = require("../../../public/Email Templates/forgotpassword");
 exports.register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -77,90 +78,99 @@ exports.login = async (req, res) => {
 }
 
 
-exports.forgotPassword = async (req, res) => {
-  const { email } = req.body;
-  const user = await User.findOne({ email });
-  if (!user) return res.status(404).json({ message: "User not found" });
-
-  const otp = utils.generateOTP(4);
-  const otpData = {
-    email: email,
-    
-    otp: otp,
-    is_used: false,
-    is_verified: false,
-    expiration_time: new Date(Date.now() + 15 * 60 * 1000),
-  };
-  await OTP.create(otpData);
-
-  
-  const html = getOtpEmail(user.name || user.email, otp);
-
-  const emailSent = await sendEmail({
-    to: email,
-    subject: 'Reset your password',
-    html,
-  });
-
-  if (emailSent) {
-    res.json({ message: "Password reset email sent" });
-  } else {
-    res.status(500).json({ message: "Failed to send email" });
-  }
-};
-
-
-exports.verifyOtp = async (req, res) => {
+ exports.forgotPassword = async (req, res) => {
   try {
-    const data = req.body;
-    if(data.email && data.otp){
-      const otpData = await OTP.findOne({ otp: data.otp, email: data.email });
-    if (!otpData) {
-      return res.status(400).json({ message: "Invalid OTP" });
-    }
-    if (otpData.expiration_time < new Date()) {
-      return res.status(400).json({ message: "OTP has expired" });
-    }
-    if (otpData.is_used) {
- return res.status(400).json({ message: "OTP has already been used" });
-    }
-    if (otpData.is_verified) {
-      return res.status(400).json({ message: "OTP has already been verified" });
-    }
-    otpData.is_used = true;
-    otpData.is_verified = true;
-    await otpData.save();
-    // const user = await User.findOne({ email: data.email });
-    // if (!user) {
-    //   throw new Error("User not found");
-    // }
-    // user.password = data.password;
-    // await user.save();
+    const { email, production } = req.body;
 
-
-
-    res.json({ message: "otp verified " });
+    // Find the admin
+    const user = await User.findOne({email:email})
+    if (!user) {
+      return utils.handleError(res, {
+        message: "Invalid email, admin not found",
+        code: 400,
+      });
     }
 
-    
+    // Generate token and expiration
+    const token = uuidv4();
+    const tokenExpirationDuration = 15 * 60 * 1000; // 15 minutes in ms
 
-  } catch (error) {
-    console.error("Error creating FAQ:", error);
-    throw error;
-  }
-};
-exports.resetPassword = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
-    if (!user) return res.status(404).json({ message: "User not found" });
-    user.password = password;
-    await user.save();
-    res.json({ message: "Password has been successfully reset" });
+    await Token.create({
+      email: email,
+      token: token,
+      is_used: false,
+      is_verified: false,
+      expiration_time: new Date(Date.now() + tokenExpirationDuration),
+    });
+
+    // Construct reset link
+    const resetLink = `${process.env.USER_FRONTEND_URL}pages/reset-password/${token}`;
+    const html= getForgotPasswordEmail(user.name,resetLink)
+
+    // Send email
+    await sendEmail(
+      {
+        to:email,
+        subject: "Password Reset Request",
+        resetLink,
+        html
+      },
+      
+    );
+
+    // Send success response
+    res.json({
+      message: "Reset link has been sent to your email",
+      code: 200,
+    });
   } catch (error) {
     utils.handleError(res, error);
   }
-}
+};
+
+exports.resetPassword = async (req, res) => {
+  try {
+    const { token, password } = req.body;
+
+    // Find token
+    const reset = await Token.findOne({token:token})
+
+    if (!reset || reset.is_used) {
+      return utils.handleError(res, {
+        message: "Invalid or expired reset password token",
+        code: 400,
+      });
+    }
+
+    // Check token expiration
+    if (reset.expiration_time < new Date()) {
+      return utils.handleError(res, {
+        message: "Invalid or expired reset password token",
+        code: 400,
+      });
+    }
+
+    // Find admin by email
+    const user = await User.findOne({email:reset.email})
+    if (user) {
+      user.password = password; // Make sure password is hashed in a pre-save hook
+      await user.save();
+    }
+
+    // Update token status
+    reset.is_used = true;
+    reset.expiration_time = null;
+    reset.is_verified = true;
+    await reset.save();
+
+    res.json({
+      message: "Password reset successfully",
+      code: 200,
+    });
+  } catch (error) {
+    utils.handleError(res, error);
+  }
+};
 exports.countryBasicList = async (req, res) => {
   try {
     const search = req.query.search || "";

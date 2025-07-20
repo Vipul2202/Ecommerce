@@ -3,7 +3,7 @@ const transporter = require('../config/mailier');
 exports.sendEmail = async ({ to, subject, html }) => {
   try {
     const info = await transporter.sendMail({
-      from: 'InLink Pay',
+      from: 'car salon',
       to,
       subject,
       html,

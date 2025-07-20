@@ -20,11 +20,7 @@ router.post(
     trimRequest.all,
     controller.forgotPassword
 )
-router.post(
-    "/verify-otp",
-    trimRequest.all,
-    controller.verifyOtp
-)
+
 router.post(
     "/reset-password",
     trimRequest.all,
