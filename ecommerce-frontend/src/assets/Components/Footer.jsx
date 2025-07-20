@@ -15,7 +15,7 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {/* Contact Info */}
                     <div>
-                        <h2 className="text-2xl font-semibold mb-4 text-orange-500">Get In Touch</h2>
+                        <h2 className="text-2xl font-semibold mb-4 text-[#00a0db]">Get In Touch</h2>
                         <p className="flex items-center mb-2">
                             <FaMapMarkerAlt className="mr-2" />
                             7 Loton Avenue, Midland, 6056
@@ -45,7 +45,7 @@ const Footer = () => {
                     </div>
 
                     <div>
-                        <h2 className="text-2xl font-semibold mb-4 text-orange-500">Popular Links</h2>
+                        <h2 className="text-2xl font-semibold mb-4 text-[#00a0db]">Popular Links</h2>
                         <ul className="space-y-2">
                             <li><a href="/about" className="hover:underline">About Us</a></li>
                             <li><a href="/contact" className="hover:underline">Contact Us</a></li>
@@ -58,7 +58,7 @@ const Footer = () => {
 
                    
                     <div>
-                        <h2 className="text-2xl font-semibold mb-4 text-orange-500">Useful Links</h2>
+                        <h2 className="text-2xl font-semibold mb-4 text-[#00a0db]">Useful Links</h2>
                         <ul className="space-y-2">
                             <li><a href="/terms_use" className="hover:underline">Terms of Use</a></li>
                             <li><a href="/privacy" className="hover:underline">Privacy Policy</a></li>
@@ -69,7 +69,7 @@ const Footer = () => {
 
                 <div className="border-t border-gray-700 mt-10 pt-6 text-center text-sm">
                     <p>
-                        &copy; <a href="#" className="text-blue-400 hover:underline">© carsaloon.com.au</a>, All Rights Reserved.
+                        &copy; <a href="#" className="text-[#00a0db] hover:underline">© carsaloon.com.au</a>, All Rights Reserved.
                     </p>
                 </div>
             </div>
@@ -82,7 +82,7 @@ const Footer = () => {
                         behavior: "smooth",
                     })
                 }
-                className="fixed bottom-4 right-4 bg-orange-500 p-3 rounded-full text-white shadow-lg hover:bg-white hover:text-black"
+                className="fixed bottom-4 right-4 bg-[#00a0db] p-3 rounded-full text-white shadow-lg hover:bg-white hover:text-black"
                 title="Back to top"
             >
                 <FaChevronUp />
