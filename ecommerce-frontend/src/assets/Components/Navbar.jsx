@@ -71,14 +71,13 @@ const Navbar = () => {
         return;
       }
       try {
-<<<<<<< HEAD
       await axios.post(import.meta.env.VITE_API_FORGOT_PASSWORD, {
         email: form.email,
       });
 
-=======
+
         await axios.post("/api/user/forgot-password", { email: form.email });
->>>>>>> ba7d37b12fcc61d030d534728e8d441400589f6e
+
         toast.success(`Reset link sent to ${form.email}`);
         setShowModal(false);
         setForgotMode(false);
