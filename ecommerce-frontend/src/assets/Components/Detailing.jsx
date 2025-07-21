@@ -42,11 +42,11 @@ const Detailing = () => {
     <div className="flex flex-col  bg-black text-white">
       {/* Header */}
       <div className="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-orange-500 mb-4">
+        <h1 className="text-4xl md:text-5xl font-bold text-[#00a0db] mb-4">
           Detailing Service
         </h1>
         <nav className="text-gray-600">
-          <span className="text-orange-500">Home</span>
+          <span className="text-[#00a0db]">Home</span>
           <span className="mx-2">/</span>
           <span>Detailing Services</span>
         </nav>
@@ -99,7 +99,7 @@ const Detailing = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="p-4 bg-orange-500 text-white flex flex-col items-start justify-between h-full">
+              <div className="p-4 bg-[#00a0db] text-white flex flex-col items-start justify-between h-full">
                 <h3 className="text-lg font-semibold">{item.title}</h3>
                 <p className="text-sm mb-4">{item.price}</p>
                 <button
