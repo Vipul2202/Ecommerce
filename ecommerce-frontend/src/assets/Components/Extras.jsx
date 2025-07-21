@@ -141,7 +141,7 @@ const Extras = () => {
                 <ul className="mb-3 text-sm space-y-1">
                   {card.offers.map((item, idx) => (
                     <li key={idx} className="flex items-center">
-                      <span className="w-4 h-4 bg-white text-orange-600 mr-2 flex items-center justify-center rounded-sm text-xs font-bold">
+                      <span className="w-4 h-4 bg-white text-black mr-2 flex items-center justify-center rounded-sm text-xs font-bold">
                         ✓
                       </span>
                       {item}
@@ -154,7 +154,7 @@ const Extras = () => {
                 <ul className="mb-4 text-sm space-y-1">
                   {card.whyUs.map((item, idx) => (
                     <li key={idx} className="flex items-center">
-                      <span className="w-4 h-4 bg-white text-orange-600 mr-2 flex items-center justify-center rounded-sm text-xs font-bold">
+                      <span className="w-4 h-4 bg-white text-black mr-2 flex items-center justify-center rounded-sm text-xs font-bold">
                         ✓
                       </span>
                       {item}
@@ -176,7 +176,7 @@ const Extras = () => {
                   />
                   <p className="text-white font-semibold text-sm">{card.price}</p>
                 </div>
-                <button className="bg-white text-orange-600 px-4 py-2 rounded-full hover:bg-orange-200 text-sm font-semibold transition duration-300">
+                <button className="bg-white text-black px-4 py-2 rounded-full hover:bg-orange-200 text-sm font-semibold transition duration-300">
                   Book Now
                 </button>
               </div>

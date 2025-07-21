@@ -90,11 +90,11 @@ const Ultrapremium = () => {
     <div className="flex flex-col min-h-screen bg-black text-white">
       {/* Header */}
       <div className="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-orange-500 mb-4">
+        <h1 className="text-4xl md:text-5xl font-bold text-[#00a0db] mb-4">
          Ultra Premium Finishes
         </h1>
         <nav className="text-gray-600">
-          <span className="text-orange-500">Home</span>
+          <span className="text-[#00a0db]">Home</span>
           <span className="mx-2">/</span>
           <span>Premium Services</span>
         </nav>
@@ -114,7 +114,7 @@ const Ultrapremium = () => {
           {serviceCards.map((card, index) => (
             <div
               key={index}
-              className="bg-orange-600 p-6 rounded-lg flex flex-col justify-between"
+              className="bg-[#00a0db] p-6 rounded-lg flex flex-col justify-between"
             >
               <div>
                 <h2 className="text-2xl font-bold mb-2 items-center flex justify-center text-black">{card.title}</h2>
@@ -125,7 +125,7 @@ const Ultrapremium = () => {
                 <ul className="mb-3 text-sm space-y-1">
                   {card.offers.map((item, idx) => (
                     <li key={idx} className="flex items-center">
-                      <span className="w-4 h-4 bg-white text-orange-600 mr-2 flex items-center justify-center rounded-sm text-xs font-bold">
+                      <span className="w-4 h-4 bg-white text-[#00a0db] mr-2 flex items-center justify-center rounded-sm text-xs font-bold">
                         ✓
                       </span>
                       {item}
@@ -138,7 +138,7 @@ const Ultrapremium = () => {
                 <ul className="mb-4 text-sm space-y-1">
                   {card.whyUs.map((item, idx) => (
                     <li key={idx} className="flex items-center">
-                      <span className="w-4 h-4 bg-white text-orange-600 mr-2 flex items-center justify-center rounded-sm text-xs font-bold">
+                      <span className="w-4 h-4 bg-white text-[#00a0db] mr-2 flex items-center justify-center rounded-sm text-xs font-bold">
                         ✓
                       </span>
                       {item}
@@ -160,7 +160,7 @@ const Ultrapremium = () => {
                   />
                   <p className="text-white font-semibold text-sm">{card.price}</p>
                 </div>
-                <button className="bg-white text-orange-600 px-4 py-2 rounded-full hover:bg-orange-200 text-sm font-semibold transition duration-300 flex justify-center items-center">
+                <button className="bg-white text-[#00a0db] px-4 py-2 rounded-full hover:bg-[#00a0db] text-sm font-semibold transition duration-300 flex justify-center items-center">
                   Book Now
                 </button>
               </div>

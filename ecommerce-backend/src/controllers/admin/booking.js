@@ -20,7 +20,7 @@ exports.bookingList = async (req, res) => {
     if (status) {
       query.status = status;
     }
-    query.is_verified = true;
+    query.is_verified = false;
     const booking = await Booking.find(query)
       .limit(limit)
       .skip(offset)

@@ -26,7 +26,7 @@ const Gallery = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 px-4 py-8">
-      <h1 className="text-3xl font-bold text-center text-orange-600 mb-8">Before & After Gallery</h1>
+      <h1 className="text-3xl font-bold text-center text-black mb-8">Before & After Gallery</h1>
 
       {/* Grid of Thumbnails */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
