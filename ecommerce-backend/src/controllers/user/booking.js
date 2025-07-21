@@ -6,12 +6,15 @@ const utils = require("../../utils/utils");
 exports.createBooking=async(req,res)=>{
     try {
         const data=req.body
+        console.log("dataaa",data);
         const booking_id= utils.generateBookingId()
-        data.booking_id=booking_id
-        const booking=await Booking.create(data)
-       const confirmationLink=`${process.env.USER_FRONTEND_URL}reset-password/${booking_id}`;
-        const html=getBookingConfirmationEmail(data.first_name,)
-        await sendEmail(
+        console.log("booking_id",booking_id);
+       
+        console.log("data",data);
+        const booking=await Booking.create({...data,booking_id})
+       const confirmationLink=`${process.env.USER_FRONTEND_URL}reset-password/${booking_id}`; 
+        const html=getBookingConfirmationEmail(data.first_name,confirmationLink)
+     const ress=   await sendEmail(
       {
         to:data.email,
         subject: "Confirm your booking",
@@ -20,6 +23,7 @@ exports.createBooking=async(req,res)=>{
       },
       
     );
+    console.log("ress",ress);
         return res.status(201).json({message:"Booking created successfully",booking})
 
         
@@ -56,6 +60,8 @@ exports.confirmBooking = async (req, res) => {
     };
 
     const html = getAdminNewBookingEmail(datatosend);
+    const adminemail=process.env.ADMIN_EMAIL
+    console.log("adminemail",adminemail);
 
     await sendEmail({
       to: process.env.ADMIN_EMAIL,
