@@ -23,9 +23,9 @@ exports.getProducts = async (req, res) => {
                 {description:{$regex:search,$options:"i"}}
             ]
         }
-        if(category){
-            query.category=category
-        }
+       if (category && category.trim() !== "") {
+      query.category = category;
+    }
         const products = await Product.find(query).limit(limit).skip(offset).populate("category")
         const total=await Product.countDocuments(query)
         
