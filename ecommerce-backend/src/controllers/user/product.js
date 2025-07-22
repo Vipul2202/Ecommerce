@@ -1,5 +1,6 @@
 const Product = require("../../models/admin/product")
 const utils = require("../../utils/utils")
+const Category = require("../../models/admin/category")
 
 exports.getProduct = async (req, res) => {
     try {
