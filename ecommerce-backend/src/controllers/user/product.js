@@ -34,3 +34,18 @@ exports.getProducts = async (req, res) => {
         utils.handleError(res, error)
     }
 }
+exports.getCategories = async (req, res) => {
+    try {
+        const {search}=req.query
+        const query={}
+        if(search){
+            query.$or=[
+                {name:{$regex:search,$options:"i"}}
+            ]
+        }
+        const categories = await Category.find(query).select("name")
+        res.status(200).json({ data: categories, message: "Categories fetched successfully" })
+    } catch (error) {
+        utils.handleError(res, error)
+    }
+}
