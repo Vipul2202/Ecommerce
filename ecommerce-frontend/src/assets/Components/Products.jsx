@@ -59,11 +59,11 @@ const Products = () => {
   }, [selectedCategory]);
 
   const handleAddToCart = (product) => {
-    if (!user) {
-      alert("You need to login first to add items to the cart.");
-      navigate("/", { state: { openLogin: true } });
-      return;
-    }
+  if (!user) {
+    toast.warning("You need to login first to add items to the cart.");
+    navigate("/", { state: { openLogin: true } });
+    return;
+  }
 
     toast.success(`Added ${product.name} to cart`);
     console.log("Add to cart:", product);

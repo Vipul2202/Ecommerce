@@ -73,10 +73,15 @@ const location = useLocation();
 useEffect(() => {
   if (location.state?.openRegister) {
     setShowModal(true);
-    setIsLogin(false); // ⬅️ Show register modal
-    window.history.replaceState({}, document.title); // Clear state to prevent reopening
+    setIsLogin(false);
+    window.history.replaceState({}, document.title);
+  } else if (location.state?.openLogin) {
+    setShowModal(true);
+    setIsLogin(true);
+    window.history.replaceState({}, document.title);
   }
 }, [location]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
