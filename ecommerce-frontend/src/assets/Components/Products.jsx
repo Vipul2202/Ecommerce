@@ -26,7 +26,11 @@ const Products = () => {
   // Fetch categories
   const fetchCategories = async () => {
     try {
-      const res = await axios.get("http://localhost:9006/user/get-category");
+     const res = await axios.get("http://localhost:9006/user/get-categories", {
+        headers: {
+          "Content-Type": "text/plain",
+        },
+      });
       const fetched = res.data?.data || [];
       setCategories(fetched);
     } catch (error) {

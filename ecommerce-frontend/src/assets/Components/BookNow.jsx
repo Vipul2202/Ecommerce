@@ -54,8 +54,9 @@ const BookNow = () => {
     try {
       setIsLoading(true);
       const payload = [formData];
+      console.log("Booking payload:", payload);
       const response = await axios.post("http://localhost:9006/user/create-booking", payload);
-
+       console.log("Booking response:", response);
       if (response.status === 200 || response.status === 201) {
         setFormData({
           carType: "",
