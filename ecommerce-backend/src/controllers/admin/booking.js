@@ -41,7 +41,7 @@ exports.changeBookingStatus = async (req, res) => {
     if (status === "approved") {
       const booking = await Booking.findByIdAndUpdate(
         id,
-        { booking_status: status },
+        { booking_status: status, is_verified: true,message:reason },
         { new: true }
       );
       const datatosend = {
@@ -56,6 +56,8 @@ exports.changeBookingStatus = async (req, res) => {
         email: booking.email,
         phone: booking.phone,
         booking_status: booking.booking_status,
+        message: booking.message,
+
       };
 
       const html = getBookingApprovalEmail(datatosend);
@@ -88,7 +90,7 @@ exports.changeBookingStatus = async (req, res) => {
       const html = getBookingCancellationEmail(datatosend);
       await sendEmail({
         to: booking.email,
-        subject: "Your Booking has been approved",
+        subject: "Your Booking has been cancelled",
         html,
       });
       return res.status(200).json({ message: "Booking status updated successfully" });

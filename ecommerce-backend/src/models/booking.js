@@ -47,6 +47,9 @@ const bookingSchema=new mongoose.Schema({
     },
     booking_cancel_reason:{
         type:String
+    },
+    message:{
+        type:String
     }
 },{
     timestamps:true

@@ -137,7 +137,8 @@ exports.getBookingApprovalEmail = (booking) => {
     last_name,
     email,
     phone,
-    booking_status
+    booking_status,
+    message
   } = booking;
 
   return `
@@ -164,6 +165,7 @@ exports.getBookingApprovalEmail = (booking) => {
               <tr><td><strong>Email:</strong></td><td>${email}</td></tr>
               <tr><td><strong>Phone:</strong></td><td>${phone}</td></tr>
               <tr><td><strong>Status:</strong></td><td style="color: green;"><strong>${booking_status}</strong></td></tr>
+              <tr><td><strong>Message:</strong></td><td>${message}</td></tr>
             </table>
             <p style="margin-top: 30px; font-size: 14px; color: #777;">
               If you have any questions or need to make changes to your booking, feel free to contact us.
