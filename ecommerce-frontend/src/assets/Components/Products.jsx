@@ -1,148 +1,133 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import Select from 'react-select';
+import Lottie from 'react-lottie';
+import noDataImage from '../../../src/img/no-data.png';
+import { toast } from 'react-toastify';
 
 const Products = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [searchTerm, setSearchTerm] = useState('');
   const [products, setProducts] = useState([]);
+  const [user, setUser] = useState(null);
   const [categories, setCategories] = useState([]);
-  const [categoryId, setCategoryId] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  const [selectedCategory, setSelectedCategory] = useState({ label: "All Categories", value: null });
+  const [loading, setLoading] = useState(false);
 
-  const BASE_URL = 'http://localhost:9006';
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
 
-  // Fetch all categories
+  // Fetch categories
   const fetchCategories = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/user/get-categories`);
-      setCategories(res.data?.data || []);
-    } catch (err) {
-      console.error('Error fetching categories:', err);
-    }
-  };
-
-  // Fetch products based on search & category
-  const fetchProducts = async () => {
-    try {
-      const queryParams = new URLSearchParams();
-      queryParams.append('limit', 1000);
-      if (searchTerm) queryParams.append('search', searchTerm);
-      if (categoryId) queryParams.append('category', categoryId);
-
-      const response = await axios.get(`${BASE_URL}/user/get-products?${queryParams.toString()}`);
-      setProducts(response.data?.data || []);
+     const res = await axios.get("http://localhost:9006/user/get-categories", {
+        headers: {
+          "Content-Type": "text/plain",
+        },
+      });
+      const fetched = res.data?.data || [];
+      setCategories(fetched);
     } catch (error) {
-      console.error('Error fetching products:', error);
+      console.error("Error fetching categories:", error);
     }
   };
 
-  // Load categories on first render
+  // Fetch products
+  const fetchProducts = async (categoryId = null) => {
+    setLoading(true);
+    try {
+      const url = categoryId
+        ? `http://localhost:9006/user/get-products?category=${categoryId}`
+        : `http://localhost:9006/user/get-products`;
+
+      const res = await axios.get(url);
+      setProducts(res.data?.data || []);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+    setLoading(false);
+  };
+
   useEffect(() => {
     fetchCategories();
+  }, []);
 
-    const queryParams = new URLSearchParams(location.search);
-    const catId = queryParams.get('category');
-    if (catId) {
-      setCategoryId(catId);
-    }
-  }, [location.search]);
-
-  // Fetch products when filters change
   useEffect(() => {
-    fetchProducts();
-  }, [searchTerm, categoryId]);
+    fetchProducts(selectedCategory?.value || null);
+  }, [selectedCategory]);
 
-  const indexOfLast = currentPage * itemsPerPage;
-  const indexOfFirst = indexOfLast - itemsPerPage;
-  const currentItems = products.slice(indexOfFirst, indexOfLast);
-  const totalPages = Math.ceil(products.length / itemsPerPage);
+  const handleAddToCart = (product) => {
+  if (!user) {
+    toast.warning("You need to login first to add items to the cart.");
+    navigate("/", { state: { openLogin: true } });
+    return;
+  }
+
+    toast.success(`Added ${product.name} to cart`);
+    console.log("Add to cart:", product);
+  };
+
+  const handleProductClick = (product) => {
+    navigate(`/car-details/${product._id}`);
+  };
+
+  const categoryOptions = [
+    { label: "All Categories", value: null },
+    ...categories.map((cat) => ({ label: cat.name, value: cat._id })),
+  ];
 
   return (
-    <div className="mx-auto bg-black text-white p-6">
-      <h1 className="text-3xl font-bold text-center mb-4 animate-pulse">
-        Luxury Car Products
-      </h1>
+    <div className="p-4">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-3xl font-bold mb-6">All Products</h2>
 
-      {/* Category Dropdown */}
-      <div className="flex justify-center mb-6">
-        <select
-          className="text-black px-4 py-2 rounded-lg w-72"
-          value={categoryId}
-          onChange={(e) => {
-            setCategoryId(e.target.value);
-            setCurrentPage(1);
-          }}
-        >
-          <option value="">All Categories</option>
-          {categories.map((cat) => (
-            <option key={cat._id} value={cat._id}>
-              {cat.name}
-            </option>
-          ))}
-        </select>
-      </div>
+        <div className="mb-6">
+          <label className="block mb-2 font-semibold">Filter by Category</label>
+          <Select
+            options={categoryOptions}
+            value={categoryOptions.find((opt) => opt.value === selectedCategory?.value)}
+            onChange={setSelectedCategory}
+            placeholder="Select category..."
+          />
+        </div>
 
-      {/* Search Input */}
-      <div className="mb-6 flex justify-center">
-        <input
-          type="text"
-          placeholder="Search Cars..."
-          className="px-4 py-2 rounded-md text-black w-80"
-          value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-            setCurrentPage(1);
-          }}
-        />
-      </div>
-
-      {/* Product Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        {currentItems.map((car) => (
-          <div
-            key={car._id}
-            className="bg-orange-700 p-4 rounded-2xl shadow-2xl border border-yellow-400 flex flex-col items-center text-center sm:items-start sm:text-left"
-          >
-            <img
-              src={car.image}
-              alt={car.name}
-              className="w-full h-48 object-cover rounded-xl mb-4 cursor-pointer"
-              onClick={() => navigate(`/car/${car._id}`)}
-            />
-            <h2 className="text-xl font-bold">{car.name}</h2>
-            <p className="text-yellow-300 font-semibold">₹{car.price}</p>
-
-            <div className="flex gap-2 mt-4">
-              <button className="bg-black hover:bg-gray-700 text-white font-bold py-1 px-3 rounded-full">
-                Add to Cart
-              </button>
-              <button className="bg-white text-black hover:text-yellow-900 font-bold py-1 px-3 rounded-full border border-yellow-600">
-                Buy Now
-              </button>
-            </div>
+        {loading ? (
+          <p>Loading...</p>
+        ) : products.length === 0 ? (
+          <div className="flex flex-col items-center justify-center mt-10">
+            <img src={noDataImage} alt="No Data" className="w-64 mt-4" />
+            <p className="text-lg text-gray-600 mt-2">No products found</p>
           </div>
-        ))}
-      </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {products.map((product) => (
+              <div key={product._id} className="bg-white rounded-lg shadow-md p-4">
+                <img
+                  src={product?.image}
+                  alt={product.name}
+                  className="h-40 w-full object-cover cursor-pointer"
+                  onClick={() => handleProductClick(product)}
+                />
+                <h3 className="text-xl font-semibold mt-2">{product.name}</h3>
+                <p className="text-gray-700 mt-1">{product.description}</p>
+                <p className="text-lg font-bold mt-2">₹{product.price}</p>
 
-      {/* Pagination */}
-      <div className="flex justify-center mt-10 gap-2">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentPage(index + 1)}
-            className={`px-3 py-1 rounded ${
-              currentPage === index + 1
-                ? 'bg-orange-700 text-black font-bold'
-                : 'bg-orange-900 text-white hover:bg-yellow-700'
-            }`}
-          >
-            {index + 1}
-          </button>
-        ))}
+                <button
+                  onClick={() => handleAddToCart(product)}
+                  className="mt-4 w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

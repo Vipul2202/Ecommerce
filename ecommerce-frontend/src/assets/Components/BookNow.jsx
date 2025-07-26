@@ -3,13 +3,13 @@ import axios from "axios";
 
 const BookNow = () => {
   const [formData, setFormData] = useState({
-    car_type: "",
-    vechile_registration: "",
+    carType: "",
+    registration: "",
     services: [],
-    booking_date: "",
-    booking_time: "",
-    first_Name: "",
-    last_Name: "",
+    date: "",
+    time: "",
+    firstName: "",
+    lastName: "",
     email: "",
     phone: "",
   });
@@ -41,37 +41,33 @@ const BookNow = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const timeStr = formData.time;
-
-    if (!timeStr) {
-      return;
-    }
-
-    const [hour, minute] = timeStr.split(":").map(Number);
+    const [hour, minute] = formData.time.split(":").map(Number);
     const totalMinutes = hour * 60 + minute;
-
     const minMinutes = 7 * 60;
     const maxMinutes = 17 * 60;
 
     if (totalMinutes < minMinutes || totalMinutes > maxMinutes) {
+      alert("Please select a time between 07:00 and 17:00.");
       return;
     }
 
     try {
       setIsLoading(true);
       const payload = [formData];
+      console.log("Booking payload:", payload);
       const response = await axios.post("http://localhost:9006/user/create-booking", payload);
-
+       console.log("Booking response:", response);
       if (response.status === 200 || response.status === 201) {
         setFormData({
-          car_type: "",
-          vechile_registration: "",
+          carType: "",
+          registration: "",
           services: [],
-          booking_date: "",
-          booking_time: "",
-          first_Name: "",
-          last_Name: "",
+          date: "",
+          time: "",
+          firstName: "",
+          lastName: "",
           email: "",
+          phone: "",
         });
         setShowModal(true);
       }
@@ -84,7 +80,6 @@ const BookNow = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white relative">
-      {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
           <div className="bg-white text-black rounded-lg shadow-lg p-8 max-w-md w-full text-center">
@@ -100,7 +95,6 @@ const BookNow = () => {
         </div>
       )}
 
-      {/* Loading Overlay */}
       {isLoading && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-40">
           <div className="loader border-4 border-white border-t-[#00a0db] rounded-full w-12 h-12 animate-spin"></div>
@@ -125,12 +119,12 @@ const BookNow = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="carType" className="block mb-1 font-medium text-white">Choose Car Type</label>
+                <label className="block mb-1 font-medium text-white">Choose Car Type *</label>
                 <select
                   name="carType"
-                  id="carType"
                   value={formData.carType}
                   onChange={handleChange}
+                  required
                   className="p-2 text-black rounded w-full"
                 >
                   <option value="">--Select--</option>
@@ -139,16 +133,15 @@ const BookNow = () => {
                   <option value="hatchback">Hatchback</option>
                 </select>
               </div>
-
               <div>
-                <label htmlFor="registration" className="block mb-1 font-medium text-white">Vehicle Registration</label>
+                <label className="block mb-1 font-medium text-white">Vehicle Registration *</label>
                 <input
                   type="text"
-                  id="registration"
                   name="registration"
                   placeholder="Enter Vehicle Registration"
                   value={formData.registration}
                   onChange={handleChange}
+                  required
                   className="p-2 text-black rounded w-full"
                 />
               </div>
@@ -163,6 +156,7 @@ const BookNow = () => {
                     onChange={handleServiceChange}
                     className="accent-[#00a0db]"
                     checked={formData.services.includes(service)}
+                    required={formData.services.length === 0}
                   />
                   <span>{service}</span>
                 </label>
@@ -171,47 +165,48 @@ const BookNow = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="date" className="block mb-1 font-medium text-white">Date</label>
+                <label className="block mb-1 font-medium text-white">Date *</label>
                 <input
                   type="date"
                   name="date"
                   value={formData.date}
                   onChange={handleChange}
+                  required
                   className="p-2 text-black rounded w-full"
                 />
               </div>
               <div>
-                <label htmlFor="time" className="block mb-1 font-medium text-white">Clock</label>
+                <label className="block mb-1 font-medium text-white">Clock *</label>
                 <input
                   type="time"
                   name="time"
                   value={formData.time}
                   onChange={handleChange}
-                  className="p-2 text-black rounded w-full"
                   min="07:00"
                   max="17:00"
+                  required
+                  className="p-2 text-black rounded w-full"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="firstName" className="block mb-1 font-medium text-white">First Name</label>
+                <label className="block mb-1 font-medium text-white">First Name *</label>
                 <input
                   type="text"
-                  id="firstName"
                   name="firstName"
                   placeholder="First Name"
                   value={formData.firstName}
                   onChange={handleChange}
+                  required
                   className="p-2 text-black rounded w-full"
                 />
               </div>
               <div>
-                <label htmlFor="lastName" className="block mb-1 font-medium text-white">Last Name</label>
+                <label className="block mb-1 font-medium text-white">Last Name (optional)</label>
                 <input
                   type="text"
-                  id="lastName"
                   name="lastName"
                   placeholder="Last Name"
                   value={formData.lastName}
@@ -223,18 +218,19 @@ const BookNow = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="email" className="block mb-1 font-medium text-white">Email</label>
+                <label className="block mb-1 font-medium text-white">Email *</label>
                 <input
                   type="email"
                   name="email"
                   placeholder="Email"
                   value={formData.email}
                   onChange={handleChange}
+                  required
                   className="p-2 text-black rounded w-full"
                 />
               </div>
               <div>
-                <label htmlFor="phone" className="block mb-1 font-medium text-white">Phone Number</label>
+                <label className="block mb-1 font-medium text-white">Phone Number (optional)</label>
                 <input
                   type="tel"
                   name="phone"

@@ -47,7 +47,7 @@ function App() {
           <Route path="/washing" element={<Washing />} />
           <Route path="/about" element={<About />} />
           <Route path="/products" element={<Products />} />
-              <Route path="/car/:id" element={<CarDetailPage />} />
+          <Route path="/car-details/:id" element={<CarDetailPage />} />
           <Route path='gallery' element={<Gallery />} />
         </Routes>
 
